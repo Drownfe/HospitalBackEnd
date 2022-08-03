@@ -1,14 +1,9 @@
 package com.sofkau.hospitalBackEnd.HospitalBackEnd.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+
 @Entity
 @Table(name = "patient")
 public class Patient {
@@ -18,8 +13,9 @@ public class Patient {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "fk_medical_specialty")
+    //@JsonBackReference
     private Specialty fkSpecialty;
 
     @Column(name = "name", length = 45)

@@ -1,16 +1,13 @@
 package com.sofkau.hospitalBackEnd.HospitalBackEnd.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Data
 @Table(name = "specialty")
 public class Specialty {
     @Id
@@ -24,6 +21,7 @@ public class Specialty {
     @Column(name = "physician_in_charge", length = 45)
     private String physicianInCharge;
 
-    @OneToMany(mappedBy = "fkMedicalSpecialty")
-    private Set<Patient> patients = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "fkMedicalSpecialty",fetch= FetchType.EAGER)
+    @JsonManagedReference
+    private List<Patient> patients = new ArrayList<>();
 }
